@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test Scores</title>
+</head>
+<body>
+    <h1>Test Scores App</h1>
+    <button id="enterScores">Enter Test Scores</button>
+    <div id="results"></div>
+
+    <script>
+        function calculateScores() {
+            let input = prompt("Enter test scores separated by commas:");
+
+            if (input === null || input.trim() === "") {
+                document.getElementById("results").innerHTML =
+                    "<p>No scores were entered.</p>";
+                return;
+            }
+
+            let scores = input.split(",").map(Number);
+            let low = Math.min(...scores);
+            let high = Math.max(...scores);
+            let total = scores.reduce((sum, score) => sum + score, 0);
+            let average = total / scores.length;
+
+            document.getElementById("results").innerHTML = `
+                <p>Scores: ${scores.join(", ")}</p>
+                <p>Low Score: ${low}</p>
+                <p>High Score: ${high}</p>
+                <p>Average Score: ${average.toFixed(1)}</p>
+            `;
+        }
+
+        document.getElementById("enterScores")
+            .addEventListener("click", calculateScores);
+    </script>
+</body>
+</html>
